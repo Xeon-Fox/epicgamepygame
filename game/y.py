@@ -1,13 +1,24 @@
 import pygame as pg
-import controls 
-import player
+from player import Player
+
 FPS = 25
 pg.init()
 Clock = pg.time.Clock()
 screen = pg.display.set_mode((1024, 768))
 background = pg.image.load("resources/bg.png")
 
-me = player.init((256/4, 256/4), (512-40, 384-50))
+me = Player(screen, ( 256/4, 256/4), (512-40, 384-50),(
+    {"key": pg.K_UP, "animation": "up"},
+    {"key": pg.K_DOWN, "animation": "down"},
+    {"key": pg.K_LEFT, "animation": "left"},
+    {"key": pg.K_RIGHT, "animation": "right"}
+))
+bro = Player(screen, ( 256/4, 256/4), (112-40, 384-50),(
+    {"key": pg.K_w, "animation": "up"},
+    {"key": pg.K_s, "animation": "down"},
+    {"key": pg.K_a, "animation": "left"},
+    {"key": pg.K_d, "animation": "right"}
+))
 
 gameover = False
 while not gameover:
@@ -16,8 +27,8 @@ while not gameover:
         if e.type == pg.QUIT:
             gameover = True
 
-    controls.update()
     screen.blit(background, (0, 0))
-    screen.blit(me, player.my_position)
+    me.update()
+    bro.update()
     pg.display.update()
     Clock.tick(FPS)
