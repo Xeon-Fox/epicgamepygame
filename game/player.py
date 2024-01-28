@@ -20,7 +20,8 @@ class Player:
         self.position = position
         self.controls = controls
         self.layer = layer
-        self.sprite = pg.image.load("resources\Sprites.png")
+        self.sprite = pg.image.load("resources/Sprites.png")
+        #VN: исправил слэш в пути к файлу     ^  иначе падает. Не забывайте
         self.surface = pg.Surface(size)
         self.surface.set_colorkey((0,0,0))
         self.current_animation = "down"
